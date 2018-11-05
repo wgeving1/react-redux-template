@@ -1,7 +1,7 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import * as axiosWrapper from '../../../utilities/axios/wrapper'
+import * as axiosWrapper from '../../utilities/axios/wrapper'
 
-export function fetchDailyMessage(amount) {
+export function fetchDailyMessage() {
   return {
     type: 'FETCH_DAILY_MESSAGE_REQUEST'
   }

@@ -1,5 +1,5 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
-import * as axiosWrapper from '../../../utilities/axios/wrapper'
+import * as axiosWrapper from '../../utilities/axios/wrapper'
 
 export function verifyUserRequest(email, password) {
   return {

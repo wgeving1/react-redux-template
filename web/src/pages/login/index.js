@@ -1,6 +1,7 @@
 //TODO trigger the verify user action when the user clicks the Login button...also
 //cause the page to redirect to the landing page once the user has logged in.
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import CSSModules from 'react-css-modules'
 import { Button, Icon, Input } from 'semantic-ui-react'
 
@@ -69,32 +70,3 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CSSModules(Login, css))
-
-
-import React, { Component } from 'react'
-import CSSModules from 'react-css-modules'
-
-import { connect } from 'react-redux'
-import { fetchDailyMessage } from './actions'
-import css from './index.css'
-
-class Homepage extends Component {
-  componentDidMount() {
-    this.props.dispatch(fetchDailyMessage())
-  }
-
-  render() {
-    const { messageOfTheDay } = this.props
-
-    return (
-      <div styleName="homepage-container">
-        <div styleName="daily-message">
-          {messageOfTheDay}
-        </div>
-
-      </div>
-    )
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(CSSModules(Homepage, css))

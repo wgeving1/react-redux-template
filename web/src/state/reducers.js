@@ -1,12 +1,11 @@
 import { combineReducers } from 'redux'
 
-import user from '../process/users/reducer'
-import homepage from '../ui/pages/homepage/reducer'
-import homepage from '../ui/pages/homepage/reducer'
+import homepage from '../pages/home/reducer'
+import loginpage from '../pages/login/reducer'
 
 const appReducer = combineReducers({
-  user,
-  homepage
+  homepage,
+  loginpage
 })
 
 export default (state, action) => {

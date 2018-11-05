@@ -3,7 +3,7 @@ import { Link, Route, Switch } from 'react-router-dom'
 import CSSModules from 'react-css-modules'
 
 import css from './index.css'
-import Home from './homepage/'
+import Home from './home/'
 import Login from './login/'
 
 

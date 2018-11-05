@@ -14,5 +14,7 @@ const userMapper = (row) => ({
 
 export async function fetchUserByEmail(email) {
   const query = sql`select * from users where email = ${email};`
-  return (await PGWrapper.sqlAndMap(query, userMapper))[0]
+  const results = await PGWrapper.sqlAndMap(query, userMapper)
+  console.log('Results', results)
+  return results[0]
 }
