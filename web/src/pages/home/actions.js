@@ -8,7 +8,7 @@ export function fetchDailyMessage() {
 }
 
 export function* executeFetchDailyMessage() {
-  const url = `/daily/message/`
+  const url = `/reviews/favorable/`
   try {
     const requestFunc = (url) => axiosWrapper.get(url)
     const res = yield call(requestFunc, url)
@@ -19,10 +19,10 @@ export function* executeFetchDailyMessage() {
   }
 }
 
-export function fetchSuccess({ dailyMessage }) {
+export function fetchSuccess(message) {
   return {
     type: 'FETCH_DAILY_MESSAGE_SUCCESS',
-    message: dailyMessage
+    message: message
   }
 }
 const sagas = [

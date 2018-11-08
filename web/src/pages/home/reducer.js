@@ -7,7 +7,7 @@ export default function(state = initialState, action = {}) {
     case 'FETCH_DAILY_MESSAGE_SUCCESS':
       return {
         ...state,
-        messageOfTheDay: message
+        messageOfTheDay: action.message
       }
     default:
       return state

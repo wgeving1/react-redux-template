@@ -24,8 +24,7 @@ export function* executeVerifyUser({ email, password }) {
 export function verifyUserSuccess(data) {
   return {
     type: 'VERIFY_USER_SUCCESS',
-    user: data.user,
-    admin: data.admin
+    user: data.user
   }
 }
 

@@ -15,7 +15,7 @@ export async function authinticateLogin(email, password) {
 
   if(credsMatch) {
     return {
-      match: true
+      user
     }
   } else {
     throw new Error('Email or Password not found')

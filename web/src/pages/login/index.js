@@ -2,6 +2,7 @@
 //cause the page to redirect to the landing page once the user has logged in.
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import CSSModules from 'react-css-modules'
 import { Button, Icon, Input } from 'semantic-ui-react'
 
@@ -33,7 +34,10 @@ class Login extends Component {
   }
 
   render() {
-    console.log("Props", this.props)
+    if(typeof this.props.login.user === 'object') {
+      return <Redirect to="/landing"/>
+    }
+
     return (
       <div>
         <div styleName="title">Welcome to Helio Challenges</div>
@@ -57,7 +61,7 @@ class Login extends Component {
 
 const mapStateToProps = state => {
   return {
-    loggedIn: state.loginpage.loggedIn
+    login: state.loginpage
   }
 }
 
