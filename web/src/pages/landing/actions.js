@@ -15,7 +15,6 @@ export function* executeUpdateUserEmail({ handle, email }) {
   try {
     const request = (url, body) => axiosWrapper.post(url, body)
     const res = yield call(request, url, ({ email }))
-    console.log('results', res)
     yield put(verifyUserUpdateSuccess(res.data))
   } catch (res) {
     // eslint-disable-next-line noconsole

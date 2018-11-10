@@ -31,7 +31,9 @@ class Landing extends Component {
 
     return (
       <div styleName="content">
-        Hi there {this.props.user.firstName}
+        <div>
+          Hi there {this.props.user.firstName}, your email is: {this.props.user.email}
+        </div>
         <input type="text"
                value={this.state.email}
                placeholder="Email..."
