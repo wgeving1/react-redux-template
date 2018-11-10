@@ -7,9 +7,21 @@ import { verifyUserUpdateRequest } from './actions'
 import css from './index.css'
 
 class Landing extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      email: !props.user ? '' : props.user.email
+    }
+
+  }
+  handleEmailInputChange = (e) => {
+    e.preventDefault()
+    this.setState({email: e.target.value})
+  }
+
   handleChangeUser = (e) => {
     e.preventDefault()
-    this.props.changeUser(this.props.user.userHandle, 'my-new-email@gmailcom')
+    this.props.changeUserEmail(this.props.user.userHandle, this.state.email)
   }
 
   render() {
@@ -20,6 +32,10 @@ class Landing extends Component {
     return (
       <div styleName="content">
         Hi there {this.props.user.firstName}
+        <input type="text"
+               value={this.state.email}
+               placeholder="Email..."
+               onChange={this.handleEmailInputChange} />
         <button onClick={this.handleChangeUser} >Change Me</button>
       </div>
     )
@@ -34,8 +50,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    changeUser: (weNeedStuff) => {
-      dispatch(verifyUserUpdateRequest(weNeedStuff))
+    changeUserEmail: (handle, email) => {
+      dispatch(verifyUserUpdateRequest(handle, email))
     }
   }
 }

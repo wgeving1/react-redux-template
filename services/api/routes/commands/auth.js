@@ -6,9 +6,7 @@ export async function authinticateLogin(email, password) {
     throw new Error({ status: 400, msg: 'Must provide username or password' })
   }
   const user = await fetchUserByEmail(email)
-  console.log('user', user)
   const userCreds = await login(user.userHandle)
-  console.log('User Creds', userCreds)
   //Note this is a very dumbed down site...and should not be used in production
   //This is just for learning.
   const credsMatch = userCreds.passhash === password

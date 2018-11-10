@@ -15,13 +15,12 @@ const userMapper = (row) => ({
 export async function fetchUserByEmail(email) {
   const query = sql`select * from users where email = ${email};`
   const results = await PGWrapper.sqlAndMap(query, userMapper)
-  console.log('Results', results)
   return results[0]
 }
 
 
-export async function updateUser(handle, col, val) {
-  const statement = sql`update users set ${col} = ${val} where user_handle = ${handle} returning *;`
-  const results = await PGWrapper.sqlAndMap(statement, userMapper())
-  return results
+export async function updateUserEmail(handle, val) {
+  const sqlStatement = sql`update users set email = ${val} where user_handle = ${handle} returning *;`
+  const results = await PGWrapper.sqlAndMap(sqlStatement, userMapper)
+  return results[0]
 }

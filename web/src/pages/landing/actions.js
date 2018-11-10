@@ -10,10 +10,12 @@ export function verifyUserUpdateRequest(handle, email) {
 }
 
 export function* executeUpdateUserEmail({ handle, email }) {
-  const url = `/users/${handle}`
+  const url = `/users/${handle}/email`
+  console.log('Saga ---', email)
   try {
     const request = (url, body) => axiosWrapper.post(url, body)
     const res = yield call(request, url, ({ email }))
+    console.log('results', res)
     yield put(verifyUserUpdateSuccess(res.data))
   } catch (res) {
     // eslint-disable-next-line noconsole

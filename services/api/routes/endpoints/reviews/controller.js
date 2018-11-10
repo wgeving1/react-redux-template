@@ -9,7 +9,6 @@ export default class ReviewsController {
       'I would give them all my money'
     ]
     const index = Math.floor(Math.random() * reviews.length - 1)
-    console.log("Index", index)
     res.send({ message: reviews[index]})
   }
 }
