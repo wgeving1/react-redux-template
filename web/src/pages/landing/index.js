@@ -11,9 +11,17 @@ class Landing extends Component {
     super(props)
     this.state = {
       email: !props.user ? '' : props.user.email,
-      name: !props.user ? '' : props.user.username
+      username: !props.user ? '' : props.user.username
     }
+  }
 
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.user.username != this.props.user.username) {
+      this.setState({username: nextProps.username})
+    }
+    if(nextProps.user.email != this.props.user.email) {
+      this.setState({username: nextProps.email})
+    }
   }
   handleUsernameInputChange = (e) => {
     e.preventDefault()
