@@ -14,6 +14,11 @@ export default function(state = initialState, action = {}) {
         ...state,
         user: action.user
       }
+    case 'VERIFY_USERNAME_UPDATE_REQUEST':
+      return {
+        ...state,
+        user: action.user
+      }
     default:
       return state
   }

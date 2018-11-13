@@ -9,9 +9,16 @@ export function verifyUserUpdateRequest(handle, email) {
   }
 }
 
+export function verifyUserUpdateUsernameRequest(handle, username) {
+  return {
+    type: 'VERIFY_USERNAME_UPDATE_REQUEST',
+    handle,
+    username
+  }
+}
+
 export function* executeUpdateUserEmail({ handle, email }) {
   const url = `/users/${handle}/email`
-  console.log('Saga ---', email)
   try {
     const request = (url, body) => axiosWrapper.post(url, body)
     const res = yield call(request, url, ({ email }))
@@ -19,6 +26,25 @@ export function* executeUpdateUserEmail({ handle, email }) {
   } catch (res) {
     // eslint-disable-next-line noconsole
     console.error('Request failed with', res.error)
+  }
+}
+
+export function* executeUpdateUsername({ handle, username }) {
+  const url = `/users/${handle}/username`
+  try {
+    const request = (url, body) => axiosWrapper.post(url, body)
+    const res = yield call(request, url, ({ name: username }))
+    yield put(verifyUsernameUpdateSuccess(res.data))
+  } catch (res) {
+    // eslint-disable-next-line noconsole
+    console.error('Request failed with', res.error)
+  }
+}
+
+export function verifyUsernameUpdateSuccess(data) {
+  return {
+    type: 'VERIFY_USERNAME_UPDATE_SUCCESS',
+    user: data.user
   }
 }
 
@@ -30,7 +56,8 @@ export function verifyUserUpdateSuccess(data) {
 }
 
 const sagas = [
-  takeLatest('VERIFY_USER_UPDATE_REQUEST', executeUpdateUserEmail)
+  takeLatest('VERIFY_USER_UPDATE_REQUEST', executeUpdateUserEmail),
+  takeLatest('VERIFY_USERNAME_UPDATE_REQUEST', executeUpdateUsername)
 ]
 
 export default sagas

@@ -18,9 +18,8 @@ export async function fetchUserByEmail(email) {
   return results[0]
 }
 
-
 export async function updateUserEmail(handle, val) {
-  const sqlStatement = sql`update users set email = ${val} where user_handle = ${handle} returning *;`
-  const results = await PGWrapper.sqlAndMap(sqlStatement, userMapper)
+  const statement = sql`update users set email = ${val} where user_handle = ${handle} returning *;`
+  const results = await PGWrapper.sqlAndMap(statement, userMapper)
   return results[0]
 }
