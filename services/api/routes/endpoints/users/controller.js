@@ -1,4 +1,7 @@
-import { executeUpdateUserEmail } from '../../commands/users'
+import {
+  executeUpdateUserEmail,
+  executeUpdateUsername
+} from '../../commands/users'
 
 export default class UsersController {
   constructor(router) {

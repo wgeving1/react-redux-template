@@ -20,7 +20,7 @@ export function verifyUserUpdateUsernameRequest(handle, username) {
 export function* executeUpdateUserEmail({ handle, email }) {
   const url = `/users/${handle}/email`
   try {
-    const request = (url, body) => axiosWrapper.post(url, body)
+    const request = (url, body) => axiosWrapper.put(url, body)
     const res = yield call(request, url, ({ email }))
     yield put(verifyUserUpdateSuccess(res.data))
   } catch (res) {
@@ -32,8 +32,8 @@ export function* executeUpdateUserEmail({ handle, email }) {
 export function* executeUpdateUsername({ handle, username }) {
   const url = `/users/${handle}/username`
   try {
-    const request = (url, body) => axiosWrapper.post(url, body)
-    const res = yield call(request, url, ({ name: username }))
+    const request = (url, body) => axiosWrapper.put(url, body)
+    const res = yield call(request, url, ({ username: username }))
     yield put(verifyUsernameUpdateSuccess(res.data))
   } catch (res) {
     // eslint-disable-next-line noconsole

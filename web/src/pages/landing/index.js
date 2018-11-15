@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import CSSModules from 'react-css-modules'
-import { verifyUserUpdateRequest } from './actions'
+import {
+  verifyUserUpdateRequest,
+  verifyUserUpdateUsernameRequest
+} from './actions'
 
 import css from './index.css'
 
@@ -16,11 +19,13 @@ class Landing extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if(nextProps.user.username != this.props.user.username) {
-      this.setState({username: nextProps.username})
-    }
-    if(nextProps.user.email != this.props.user.email) {
-      this.setState({username: nextProps.email})
+    if(typeof nextProps.user !== undefined) {
+      if(typeof nextProps.user.username !== undefined && nextProps.user.username != this.props.user.username) {
+        this.setState({username: nextProps.username})
+      }
+      if(nextProps.user.email != this.props.user.email) {
+        this.setState({username: nextProps.email})
+      }
     }
   }
   handleUsernameInputChange = (e) => {
@@ -37,13 +42,18 @@ class Landing extends Component {
     if(this.props.user.email !== this.state.email)
       this.props.changeUserEmail(this.props.user.userHandle, this.state.email)
     if(this.props.user.username !== this.state.username)
-    this.props.changeUserusername(this.props.user.userHandle, this.state.username)
+      this.props.changeUsername(this.props.user.userHandle, this.state.username)
   }
 
   render() {
     if(typeof this.props.user === 'undefined') {
       return <Redirect to="/login"/>
     }
+
+    if(this.props.loading)
+      return(
+        <div>I getting stuff...wait!!!</div>
+      )
 
     return (
       <div styleName="content">
@@ -64,7 +74,7 @@ class Landing extends Component {
                placeholder="Email..."
                onChange={this.handleEmailInputChange} />
         </div>
-        <button onClick={this.handleChangeUserEmail} >Change Me</button>
+        <button onClick={this.handleChangeUser} >Change Me</button>
       </div>
     )
   }
@@ -72,7 +82,8 @@ class Landing extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.loginpage.user
+    user: state.loginpage.user,
+    loading: state.loginpage.loading
   }
 }
 
