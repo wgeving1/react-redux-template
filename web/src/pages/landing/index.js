@@ -21,10 +21,10 @@ class Landing extends Component {
   componentWillReceiveProps(nextProps) {
     if(typeof nextProps.user !== undefined) {
       if(typeof nextProps.user.username !== undefined && nextProps.user.username != this.props.user.username) {
-        this.setState({username: nextProps.username})
+        this.setState({username: nextProps.user.username})
       }
       if(nextProps.user.email != this.props.user.email) {
-        this.setState({username: nextProps.email})
+        this.setState({username: nextProps.user.email})
       }
     }
   }
