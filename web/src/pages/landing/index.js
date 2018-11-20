@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import { Redirect, Link } from 'react-router-dom'
 import CSSModules from 'react-css-modules'
 import {
   verifyUserUpdateRequest,
@@ -90,7 +90,9 @@ class Landing extends Component {
             Online Users
             {
               this.props.onlineUsers.map((user, i) => (
-                <div key={i}>{user.username}</div>
+                <Link to={`game/${user.userHandle}`} key={i}>
+                  {user.username}
+                </Link>
               )
             )}
           </div>

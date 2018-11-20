@@ -6,6 +6,7 @@ import css from './index.css'
 import Home from './home/'
 import Login from './login/'
 import Landing from './landing/'
+import Game from './game'
 
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
             <Route exact path="/" component={Home} />,
             <Route exact path="/login" component={Login} />,
             <Route exact path="/landing" component={Landing} />,
+            <Route exact path="/game/:tag" component={Game} />,
           </Switch>
         </div>
         <div styleName="footer-container">
