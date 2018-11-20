@@ -4,29 +4,40 @@ import { withRouter } from 'react-router'
 
 import { connect } from 'react-redux'
 import css from './index.css'
+import { fetchGameData } from './actions'
 
+//go to localhost:3000/game/95aee991-cdd7-4f0b-b40d-4b83a03dcd6e
 class GamePage extends Component {
+  componentDidMount() {
+    const { tag } = this.props.match.params
+    this.props.getGameData(tag)
+  }
+
   render() {
-    console.log("The url parm is:", this.props.match.params.tag)
+    if(this.props.players.length === 0) {
+      return <div>Loading...</div>
+    }
+
     return (
       <div >
-        On the game page
+        {this.props.players[0].username} vs {this.props.players[1].username}
+
       </div>
     )
   }
 }
 
-// const mapStateToProps = state => {
-//   return {
-//     messageOfTheDay: state.homepage.messageOfTheDay
-//   }
-// }
+const mapStateToProps = state => {
+  return {
+    players: state.gamepage.players
+  }
+}
 
-// const mapDispatchToProps = dispatch => {
-//   return {
-//     getMessage: () => {
-//       dispatch(fetchDailyMessage())
-//     }
-//   }
-// }
-export default withRouter(connect(null, null)(CSSModules(GamePage, css)))
+const mapDispatchToProps = dispatch => {
+  return {
+    getGameData: (tag) => {
+      dispatch(fetchGameData(tag))
+    }
+  }
+}
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CSSModules(GamePage, css)))

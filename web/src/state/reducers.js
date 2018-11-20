@@ -3,11 +3,13 @@ import { combineReducers } from 'redux'
 import homepage from '../pages/home/reducer'
 import loginpage from '../pages/login/reducer'
 import landingpage from '../pages/landing/reducer'
+import gamepage from '../pages/game/reducer'
 
 const appReducer = combineReducers({
   homepage,
   loginpage,
-  landingpage
+  landingpage,
+  gamepage
 })
 
 export default (state, action) => {
