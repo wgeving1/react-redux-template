@@ -89,8 +89,9 @@ class Landing extends Component {
           <div styleName="users-online">
             Online Users
             {
+              //todo replace this
               this.props.onlineUsers.map((user, i) => (
-                <Link to={`game/${user.userHandle}`} key={i}>
+                <Link to={`game/95aee991-cdd7-4f0b-b40d-4b83a03dcd6e`} key={i}>
                   {user.username}
                 </Link>
               )
