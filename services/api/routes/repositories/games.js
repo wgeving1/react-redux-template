@@ -17,7 +17,6 @@ export async function getDataForGameFromDB(gameId) {
                       or u.user_handle = g.player_two;`
 
   const players = await PGWrapper.sqlAndMap(query, userMapper)
-  console.log('here', players)
 
   return players
 }

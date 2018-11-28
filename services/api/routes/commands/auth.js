@@ -1,9 +1,10 @@
 import { login } from '../repositories/auth'
 import { fetchUserByEmail } from '../repositories/user'
+import { StatusError } from '../../common/errors'
 
 export async function authinticateLogin(email, password) {
   if (!email || !password) {
-    throw new Error({ status: 400, msg: 'Must provide username or password' })
+    throw new StatusError({ status: 400, msg: 'Must provide username or password' })
   }
   const user = await fetchUserByEmail(email)
   const userCreds = await login(user.userHandle)
@@ -16,6 +17,6 @@ export async function authinticateLogin(email, password) {
       user
     }
   } else {
-    throw new Error('Email or Password not found')
+    throw new StatusError({ status: 400, msg: 'Email or Password not found'})
   }
 }

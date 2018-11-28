@@ -12,7 +12,7 @@ class GamePage extends Component {
   componentDidMount() {
     if(typeof this.props.user !== 'undefined') {
       const { tag } = this.props.match.params
-      this.props.getGameData(tag, this.props.user.userhandle)
+      this.props.getGameData(tag, this.props.user.userHandle)
     }
   }
 
@@ -47,8 +47,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getGameData: (tag) => {
-      dispatch(fetchGameData(tag))
+    getGameData: (tag, handle) => {
+      dispatch(fetchGameData(tag, handle))
     }
   }
 }

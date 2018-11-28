@@ -23,7 +23,11 @@ class Landing extends Component {
   componentDidMount () {
     if(typeof this.props.user !== 'undefined') {
       this.props.fetchOnlineFriends(this.props.user.userHandle);
-      this.props.fetchOnlineUsers();
+      this.props.fetchOnlineUsers(this.props.user.userHandle);
+    } else {
+      //this code should be removed and is for demo purposes
+      this.props.fetchOnlineFriends('ba1842c0-9a68-4c63-821b-7caa582be387');
+      this.props.fetchOnlineUsers('ba1842c0-9a68-4c63-821b-7caa582be387');
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -54,15 +58,18 @@ class Landing extends Component {
   }
 
   render() {
-    if(typeof this.props.user === 'undefined') {
-      return <Redirect to="/login"/>
-    }
+    // if(typeof this.props.user === 'undefined') {
+    //   return <Redirect to="/login"/>
+    // }
 
     if(this.props.loading)
       return(
         <div>I getting stuff...wait!!!</div>
       )
 
+
+    return
+    (<div>hello</div>)
     return (
       <div styleName="content">
         <div styleName="profile-info">
@@ -131,8 +138,8 @@ const mapDispatchToProps = dispatch => {
     fetchOnlineFriends: (handle) => {
       dispatch(fetchOnlineFriendsRequest(handle))
     },
-    fetchOnlineUsers: () => {
-      dispatch(fetchOnlineUsersRequest())
+    fetchOnlineUsers: (handle) => {
+      dispatch(fetchOnlineUsersRequest(handle))
     }
   }
 }

@@ -47,3 +47,12 @@ export async function fetchOnlineFriendsForUser(handle) {
   const results = await PGWrapper.sqlAndMap(query, userMapper)
   return results
 }
+
+export async function fetchUserStatus(handle) {
+  const query = sql`select os.status from online_status os
+                      where os.user_handle = ${handle}
+                      and os.status;`
+  const results = await PGWrapper.sqlAndMap(query, userMapper)
+  return results.length !== 0
+}
+

@@ -83,14 +83,15 @@ export function fetchOnlineFriendsSuccess(data) {
   }
 }
 
-export function fetchOnlineUsersRequest() {
+export function fetchOnlineUsersRequest(handle) {
   return {
-    type: 'FETCH_ONLINE_USERS_REQUEST'
+    type: 'FETCH_ONLINE_USERS_REQUEST',
+    handle
   }
 }
 
-export function* executeFetchOnlineUsersRequest() {
-  const url = `/users/online`
+export function* executeFetchOnlineUsersRequest({ handle }) {
+  const url = `/users/online/${handle}`
   try {
     const request = (url) => axiosWrapper.get(url)
     const res = yield call(request, url)

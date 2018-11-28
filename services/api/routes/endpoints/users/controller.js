@@ -4,13 +4,14 @@ import {
   executeFetchOnlineUsers,
   executeFetchOnlineFriendsForUser
 } from '../../commands/users'
+import wrapAsyncFunc from '../../../common/async-wrapper'
 
 export default class UsersController {
   constructor(router) {
-    router.put('/:handle/email', this.updateUserEmail),
-    router.put('/:handle/username', this.updateUsername),
-    router.get('/online', this.fetchOnlineUsers),
-    router.get('/online/:handle/friends', this.fetchOnlineFriendsForUser)
+    router.put('/:handle/email', wrapAsyncFunc(this.updateUserEmail)),
+    router.put('/:handle/username', wrapAsyncFunc(this.updateUsername)),
+    router.get('/online/:handleLoggedInUser', wrapAsyncFunc(this.fetchOnlineUsers)),
+    router.get('/online/:handle/friends', wrapAsyncFunc(this.fetchOnlineFriendsForUser))
   }
 
   async updateUserEmail(req, res) {
@@ -28,7 +29,8 @@ export default class UsersController {
   }
 
   async fetchOnlineUsers(req, res) {
-    const results = await executeFetchOnlineUsers()
+    const { handleLoggedInUser } = req.params
+    const results = await executeFetchOnlineUsers(handleLoggedInUser)
     res.send(results)
   }
   async fetchOnlineFriendsForUser(req, res) {

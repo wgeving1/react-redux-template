@@ -1,6 +1,8 @@
+import wrapAsyncFunc from '../../../common/async-wrapper'
+
 export default class ReviewsController {
   constructor(router) {
-    router.get('/favorable', this.getMostFavReviews)
+    router.get('/favorable', wrapAsyncFunc(this.getMostFavReviews))
   }
 
   async getMostFavReviews(req, res) {
